@@ -1,0 +1,27 @@
+{
+  "name": "detect-for-editor.js",
+  "version": "1.0.0",
+  "description": "The plugin for detecting some keywords to show some dialogs to operation in editor",
+  "main": "detect-for-editor.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zysj/detect-for-editor.js.git"
+  },
+  "keywords": [
+    "detect",
+    "keyword",
+    "editor"
+  ],
+  "author": "zysj",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zysj/detect-for-editor.js/issues"
+  },
+  "homepage": "https://github.com/zysj/detect-for-editor.js#readme"
+}
