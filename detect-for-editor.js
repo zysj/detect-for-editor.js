@@ -9,7 +9,7 @@
         isShiftKey,
         body=document.body;
     var canCmd = document.documentMode ? document.documentMode < 11 : true; //判断是否是ie11（？ie11不能使用document.execCommand('insertHTML'),range的函数也无效）
-    var isIe = document.selection;          //判断是否是ie
+    var isIe = document.selection;          //判断是否是ie或版本低于11
     var keyToCode = {'@':50,'#':51};        //可能要检测的符号的键盘值
 
     function detectKeyword(el,keyWord){
@@ -108,19 +108,22 @@
 
     //ie11的生成具有class为'at_span'的span元素的方法（未完成）
     detectKeyword.prototype.insertHtml = function(html){
-        var curNode = this.getPointAtNode() || this.el.firstChild;
-        var insertLen = curNode || 0;
-        if(curNode){
-            insertLen = curNode.nodeType !='1' ? curNode.textContent.length : curNode.innerHTML.length;
-        }
-        var editHtml = this.el.innerHTML;
-        editHtml = editHtml.slice(0,insertLen) + html +editHtml.slice(insertLen);
+        var range = this.range;
+        var beforeCon = this.getBeforeCons();
+        var tmp = document.createElement('div');
+        tmp.appendChild(beforeCon);
+        beforeCon = tmp.innerHTML;
+        var elHtml = this.el.innerHTML;
+        var bcLen = beforeCon.length;
+        var afterCon = elHtml.slice(bcLen);
+        var keywordIndex = html.indexOf(this.keyWord)+1;
+        editHtml = beforeCon + html.slice(0,keywordIndex) + html.slice(keywordIndex) +afterCon;
         this.el.innerHTML = editHtml;
+        this.el.focus();
         var span = document.getElementById('at'+this.at_index);
-        // range.setStart(span,0);
-        // range.setEnd(span,0);
-        this.range.setStartAfter(span);
-        // range.collapse(true);
+        //range.setStart(span,0);
+        //range.setEnd(span,0);
+        // this.range.setStartAfter(span);
     }
 
     //插入字符串到光标所在区域

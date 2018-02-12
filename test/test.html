@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta charset="utf-8"/>
+    </head>
+    <body>
+        <div contenteditable="true" id="edit" style="width:300px;height:300px"></div>
+        <input id="input"/>
+    </body>
+    <script src="../detect-for-editor.js"></script>
+    <script type="text/javascript">
+        window.onload = function(){
+            var div = document.getElementById('edit');
+            new detectKeyword(div);
+        }
+    </script>
+</html>
